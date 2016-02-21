@@ -1,0 +1,14 @@
+{
+  "name": "congrats-you-broke-the-build",
+  "version": "0.0.1",
+  "main": "index.js",
+  "devDependencies": {
+    "aws-sdk": "2.0.23",
+    "grunt": "^0.4.5",
+    "grunt-aws-lambda": "^0.1.0",
+    "grunt-pack": "0.1.*"
+  },
+  "dependencies": {
+    "twilio": "2.1.0"
+  }
+}
