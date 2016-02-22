@@ -55,6 +55,7 @@ exports.handler = function(event, context) {
         context.done(null, "Message sent to " + numbers[blame_mail] + "!");
       } else {
         console.log(err);
+        console.log("Twilio 'To' Phone Number: '%s'", twilio_number);
         context.done(null, "There was an error, message not sent!");
       }
     });
