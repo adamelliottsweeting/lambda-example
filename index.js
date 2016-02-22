@@ -31,6 +31,9 @@ exports.handler = function(event, context) {
       // The message that is sent to the developer who broke the master branch
       var message = "Congrats " + blame + ", you managed to brake master branch on SemaphoreCI!."
 
+      // Log the failed commit details
+      console.log("Commit which Broke the Build: '%j'.", event.commit);
+
       twilioHandler(numbers, message);
     };
   };
@@ -50,12 +53,15 @@ exports.handler = function(event, context) {
       from: twilio_number,
       body: message
     }, function(err, responseData) { // this function is executed when a response is received from Twilio
+
+      // TODO: Does not have a backup if the user is not registered in our numbers config file.
+      console.log("Message recipient '%s', email '%s'.", numbers[blame_mail], blame_mail);
+
       if (!err) {
         console.log(responseData);
         context.done(null, "Message sent to " + numbers[blame_mail] + "!");
       } else {
         console.log(err);
-        console.log("Twilio 'To' Phone Number: '%s'", twilio_number);
         context.done(null, "There was an error, message not sent!");
       }
     });
